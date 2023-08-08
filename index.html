@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Birth Calculation</title>
+</head>
+<body>
+    <div class="container">
+        <div class="calculator">
+            <h2>Javascript <br><span>Age Calculator</span></h2>
+            <div class="inputbox">
+                <input type="date" id="date">
+                <button onclick="calculate()">calculate</button>
+            </div>
+            <p id="result"></p>
+        </div>
+    </div>
+    <div class="bottom">
+       <h4>@Copyright 2023.All rights are reserved</h4> 
+       <h5>Developed by <span>SANDRU</span></h5>
+    </div>
+
+    <script>
+        let userinput=document.getElementById("date");
+        let button=document.querySelector("button");
+        let para =document.getElementById("result");
+
+        userinput.max=new Date().toISOString().split("T")[0];  
+
+        function calculate(){
+            let birthdate = new Date(userinput.value)
+            
+            let y1 =birthdate.getFullYear();
+            let m1 =birthdate.getMonth()+1;
+            let d1= birthdate.getDay();
+
+            let today = new Date();
+
+            let y2=today.getFullYear();
+            let m2=today.getMonth()+1;
+            let d2=today.getDay();
+
+            let y3,m3,d3;
+
+            y3=y2-y1;
+            
+            if(m2 >= m1){
+                m3=m2-m1;
+            }else{
+                y3--;
+                m3 =12+m2 -m1;
+
+            }
+
+            if(d2>=d1){
+                d3=d2-d1;
+            }else{
+                m3--;
+                d3=Daysinmonth(y1,m1) +d2 -d1;
+            }
+            if(m3<0){
+                m3 =11;
+                y3--;
+            }
+            para.innerHTML =`you are ${y3} years,${m3} months and ${d3} days old`
+        }
+
+        function Daysinmonth(year,month){
+            return new Date(year,month,0).getDate();
+        }
+
+    </script>
+  
+</body>
+</html>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background: rgb(26,22,94);
+background: linear-gradient(90deg, rgba(26,22,94,1) 0%, rgba(166,26,170,1) 51%, rgba(30,140,162,1) 100%);
+color: white;
+    }
+    .container{
+        margin-top: 220px;
+        margin-left: 250px;
+    }
+    .container h2{
+      font-size: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin-bottom: 30px;
+    }
+    span{
+        color: yellow;
+    }
+    .inputbox{
+        background: rgb(250,250,250,0.3);
+        max-width: 300px;
+        height: 40px;
+        display: flex;
+        align-items: center;
+        padding: 30px 20px;
+        border-radius: 5px;
+    }
+    .inputbox input{
+        width: 100%;
+        height: 30px;
+        border: 0;
+        outline: 0;
+        position: relative;
+        flex: 1;
+
+    }
+    .inputbox button{
+        height: 30px;
+        width: 40%;
+        outline: none;
+        border: none;
+        background-color: rgb(222, 222, 37);
+        font-weight: 200;
+        cursor: pointer;
+        margin-left: 10px;
+        transition: 0.2s;
+    }
+    .inputbox button:hover{
+        background-color: yellow;
+    }
+    .inputbox input::-webkit-calendar-picker-indicator{
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        width: auto;
+        position: absolute;
+        background-position: calc(100% -10px);
+        background-size: 0;
+        cursor: pointer;
+
+    }
+    p{
+        margin-top: 20px;
+        
+    }
+    @media only screen and (max-width:600px){
+        .container{
+        margin-top: 160px;
+        margin-left: 150px;
+    }
+}
+    @media only screen and (max-width:480px){
+        .container{
+        margin-top: 180px;
+        margin-left: 50px;
+    }
+    }
+    .bottom{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        position:absolute;
+        bottom: 0;
+        background-color: #222f3e;
+        width: 100%;
+        height: 8%;
+        padding: 10px;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    .bottom h5{
+        margin-top: 6px;
+        margin-bottom: 3px;
+    }
+
+</style>
